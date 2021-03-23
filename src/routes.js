@@ -5,7 +5,7 @@ import InfoPage from "./components/Information.vue"
 
 
 export const routes = [
-    {path: "/acca-ar", components: {default: HomePage}},
+    {path: "/", component: HomePage},
     {path: "/models", component: ModelIndex},
     {path: "/models$:id", component: ModelView, name: "modelView" },
     {path: "/info", component: InfoPage},
