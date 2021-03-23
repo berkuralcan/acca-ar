@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes,
-  base: "/my-app/",
+  base: "/acca-ar/",
   mode: "history",
 })
 
