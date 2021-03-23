@@ -1,0 +1,64 @@
+$letter-spacing: -0.02em;
+
+.aar-heading {
+    font-family: $main-font;
+    font-weight: 700;
+    font-size: 6.2rem;
+}
+
+.aar-info-heading {
+    font-family: $main-font;
+    font-weight: 700;
+    font-size: 4rem;
+    line-height: 4.4rem;
+    letter-spacing: $letter-spacing;
+    margin-bottom: 4rem;
+}
+
+p.aar-text{
+    font-family: $main-font;
+    font-size: 2rem;
+    line-height: 170%;
+    letter-spacing: $letter-spacing;
+}
+
+p.aar-info-text{
+    font-family: $main-font;
+    font-size: 2rem;
+    line-height: 3rem;
+    letter-spacing: -0.026em;
+}
+
+@media screen and (max-width: $mobile-small){
+    .aar-heading{
+        font-size: 3.2rem;
+        text-align:center;
+        letter-spacing: -0.01em;
+        margin-bottom: 3.7rem !important;
+    }
+
+    p.aar-text{
+        font-size: 1.4rem;
+        line-height: 160%;
+        text-align: center;
+        padding-left: 1.6rem;
+        padding-right: 1.6rem;
+        margin-bottom: 3.8rem  !important;
+    }
+
+    .aar-info-heading {
+        font-weight: 600;
+        font-size: 2.4rem;
+        line-height: 2.88rem;
+        letter-spacing: -0.03em;
+        margin-bottom: .7rem;
+
+    }
+
+    p.aar-info-text {
+        font-size: 16px;
+        line-height: 170%;
+        letter-spacing: -0.02em;
+        margin-bottom: 6rem !important;
+    }
+}

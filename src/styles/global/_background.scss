@@ -1,0 +1,33 @@
+body{
+}
+
+.global-container{
+    position: relative;
+    z-index: 0;
+}
+
+.main-container{
+    display: grid;
+    gap: $main-column-gap;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+
+.component-container{
+    overflow-x: hidden;
+    align-items: center;
+    grid-column: 1 / -1;
+    display: grid;
+    gap: inherit;
+    grid-template-columns: inherit;
+}
+
+// Breakpoints for mobile
+
+@media screen and (max-width: $mobile-small){
+    .main-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
