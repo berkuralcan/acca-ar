@@ -5,12 +5,16 @@
             <model-viewer 
                 ar
                 :src="'../assets/models/' + chosenModel.modelSRC"
-                class="aar-model-viewer"></model-viewer>
+                class="aar-model-viewer">
+            </model-viewer>
+            <div v-if="chosenModel.variants.length > 0" class="centered-flex">
+                I am display'ed.
+            </div>
         </div>
-
         <div class="aar-model-right">
+            <p class="aar-exp__text hidden-desktop">Modeli Arttırılmış Gerçeklikte görüntülemek için butonu tıklayın.</p>
             <div class="aar-model-right__grid-container">
-                <div class="grid-item" v-for="model in models" :key="model.id" @click="changeModel(model)">
+                <div class="grid-item on-hover-scale" v-for="model in models" :key="model.id" @click="changeModel(model)">
                     <img :src="require(`../assets/images/${model.imgURL}`)" class="grid-item__img">
                 </div>
             </div>
@@ -78,6 +82,7 @@ export default {
   @import "../styles/core/variables.scss";
   @import "../styles/global/helpers.scss";
   @import "../styles/global/components.scss";
+  @import "../styles/global/animations.scss";
 
     .component-container{
         min-height: 70vh;
@@ -103,9 +108,7 @@ export default {
   }
 
       .grid-item{
-        display: flex;
-        align-content: center;
-        justify-content: center;
+
         background-color: #f5f5ff;
         user-select: none;
         cursor: pointer;
@@ -138,6 +141,43 @@ export default {
     model-viewer {
         width: 86rem;
         height: 65.7rem;
+    }
+
+
+    // Mobile Responsive for mobile small
+
+    @media screen and (max-width: $mobile-small) {
+        .component-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .aar-model-right__grid-container {
+            display: flex;
+            max-width: 100vw;
+            overflow-x: scroll;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        .grid-item{
+            width: 15rem;
+            height: 15rem;
+
+        }
+
+        .aar-exp {
+            display: none;
+        } 
+
+        p.aar-exp__text{
+            text-align: center;
+            font-weight: 300;
+            margin: 5rem auto;
+        }
     }
 
 

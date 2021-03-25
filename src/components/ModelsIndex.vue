@@ -63,6 +63,15 @@ export default {
         justify-content: center;
         background-color: #f8f8f8;
         user-select: none;
+        transition: all .2s;
+
+        &:hover{
+            transform: scale(1.1)
+        }
+
+        &:active {
+            transform: scale(.96)
+        }
 
         &__img{
             width: 35rem;
@@ -99,8 +108,28 @@ export default {
 
     @media screen and (max-width: $mobile-small){
 
+        .component-container{
+            height: auto;
+        }
+
+        .grid-auto-flow {
+            grid-template-columns: repeat(2, minmax(14rem, 16.8rem));
+            column-gap: 2%;
+            row-gap: 1%;
+            padding: 0 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 8rem;
+        }
+
         .grid-item{
+            height: 100%;
+            width: 100%;
             transition: all .2s;
+
+            &__img{
+                width: 100%;
+                height: auto;
+            }
         }
         .grid-item:active{
             transform: scale(.96)

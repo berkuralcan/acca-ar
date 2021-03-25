@@ -27,3 +27,10 @@
         margin-bottom: unset;
     }
 }
+
+@media screen and (min-width: 60rem) {
+
+.hidden-desktop {
+        display: none;
+    }
+}

@@ -54,6 +54,7 @@ export default {
               cursor: pointer;
               user-select: none;
               text-decoration: none;
+              transition: all .2s;
 
             &:not(:last-child) {
                 margin-right: 3.8rem;
@@ -72,7 +73,8 @@ export default {
 
   a.aar-header__navigation-link:hover{
      transform: scale(1.1);
-  }
+     color: #bbbbbb;
+       }
 
   a.aar-header__navigation-link:active{
       transform: scale(.96);

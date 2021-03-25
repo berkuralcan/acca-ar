@@ -1,3 +1,16 @@
+.on-hover-scale{
+  transition: all .2s;
+
+  &:hover{
+    transform: scale(1.1)
+  }
+
+  &:active{
+    transform: scale(0.96)
+  }
+}
+
+
 .scale-up-center {
 	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.175, 0.885, 0.320, 1.275) 0.2s both;
 	        animation: scale-up-center 0.4s cubic-bezier(0.175, 0.885, 0.320, 1.275) 0.2s both;

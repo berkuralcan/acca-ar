@@ -5,7 +5,7 @@ const models = [
         imgURL: "bedside.png",
         modelSRC: "bedside/Bedside.gltf",
         iosSRC: "",
-        variants: [],
+        variants: ["Yello", "Mello"],
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ const models = [
         imgURL: "desk.png",
         modelSRC: "desk/Desk.gltf",
         iosSRC: "",
-        variants: [],
+        variants: ["Sello"],
     },
     {
         id: 3,

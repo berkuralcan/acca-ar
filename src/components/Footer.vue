@@ -95,6 +95,10 @@ export default {
     }
 
 
+    .aar-footer__contact {
+        align-self: center;
+    }
+    
     .aar-footer__contact-container{
         display: flex;
         flex-direction: column;
