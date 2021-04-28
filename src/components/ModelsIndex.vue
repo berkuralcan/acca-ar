@@ -3,10 +3,13 @@
             <router-link 
                 v-for="model in models" 
                 :key="model.id" 
-                class="grid-item" 
+                class="grid-item on-hover-scale mobile-scale" 
                 :to="{name: 'modelView', params: {id: model.id, model: model}}" 
                 >
                 <img :src="require(`../assets/images/${model.imgURL}`)" class="grid-item__img">
+                <div v-if="model.variants.length > 0" class="centered-flex model-variants">
+                    <img class="model-variants__variant" height="40" width="40" v-for="variant in model.variants" :key="variant" :src="require(`../assets/images/variants/${variant}`)" alt="Variant for model">
+                </div>
             </router-link>
         </transition-group>
 </template>
@@ -38,7 +41,6 @@ export default {
 }
 </script>
 
-
 <style scoped lang="scss">
   @import "../styles/core/variables.scss";
   @import "../styles/global/helpers.scss";
@@ -49,36 +51,59 @@ export default {
 
     .grid-auto-flow {
           width: 100%;
-          grid-template-columns: repeat(3, minmax(20rem, 45rem));
+          grid-template-columns: repeat(auto-fill, minmax(42rem, 1fr));
+          grid-template-rows: 1fr;
           justify-self: center;
           padding: 2rem;
           cursor: pointer;
           overflow: visible;
-          margin-bottom: 2rem;
-          justify-content: center;
+          position: relative;
+
     }
+
+
     .grid-item{
         display: flex;
+        flex-direction: column;
         align-content: center;
         justify-content: center;
         background-color: #f8f8f8;
         user-select: none;
         transition: all .2s;
+        position: relative;
 
-        &:hover{
-            transform: scale(1.1)
+
+        /* The "before" pseudo-element trick keeps the grid items as perfect squares  */
+
+        &::before {
+            content: "";
+            padding-bottom: 100%;
+            display: block;
         }
 
-        &:active {
-            transform: scale(.96)
-        }
 
         &__img{
-            width: 35rem;
-            height: 35rem;
+            width: 100%;
+            align-self: center;
+            position: absolute;
+            top: 0; left: 0;
+            height: 100%;
+
         }
     }
 
+    .model-variants{
+    position: absolute;
+    bottom: 2.3rem;
+    left: 40%;
+    justify-content: center;
+
+    &__variant{
+        &:not(:last-child) {
+            margin-right: 1.5rem;
+        }
+    }
+}
 
     .grid-item:nth-child(2){
         animation-delay: .4s;
@@ -106,34 +131,41 @@ export default {
     }
 
 
-    @media screen and (max-width: $mobile-small){
+/* TABLET RESPONSIVE */
 
-        .component-container{
+@media screen and (max-width: $tablet-portrait) {
+    .model-variants{
+        left: 45%;
+    }
+}
+    
+/* MOBILE RESPONSIVE */
+
+@media screen and (max-width: $mobile-small){
+    .grid-auto-flow {
+          grid-template-columns: unset;
+    }
+
+
+    .grid-item{
+        height: auto;
+        transition: all .2s;
+
+
+        &__img{
+            width: 100%;
             height: auto;
         }
-
-        .grid-auto-flow {
-            grid-template-columns: repeat(2, minmax(14rem, 16.8rem));
-            column-gap: 2%;
-            row-gap: 1%;
-            padding: 0 1.6rem;
-            margin-top: 2rem;
-            margin-bottom: 8rem;
-        }
-
-        .grid-item{
-            height: 100%;
-            width: 100%;
-            transition: all .2s;
-
-            &__img{
-                width: 100%;
-                height: auto;
-            }
-        }
-        .grid-item:active{
-            transform: scale(.96)
-        }
     }
+
+    .model-variants {
+        left: 38%;
+
+    }
+    
+    .grid-item:active{
+        transform: scale(.96)
+    }
+}
 
 </style>

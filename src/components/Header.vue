@@ -5,14 +5,18 @@
                 <img src="../assets/images/logo.png" loading="lazy" width="86" heigth="52" alt="Website Logo" class="aar-header__logo">
             </router-link>
             <nav class="aar-header__navigation">
-                <router-link to="/info" class="aar-header__navigation-link">AR Çözümleri</router-link>
-                <router-link to="/models" class="aar-header__navigation-link">Örnek Modeller</router-link>
+                <router-link to="/info" class="aar-header__navigation-link mobile-scale">AR Çözümleri</router-link>
+                <router-link to="/models" class="aar-header__navigation-link mobile-scale">Örnek Modeller</router-link>
             </nav>
+            <resp-menu class="hidden-desktop"></resp-menu>
         </div>
     </header>
 </template>
 
 <script>
+
+import RespMenu from "./reusable/RespMenu";
+
 export default {
   name: 'ACHeader',
   data(){
@@ -22,6 +26,10 @@ export default {
   },
   methods: {
   },
+
+  components: {
+      RespMenu: RespMenu
+  }
 }
 </script>
 

@@ -1,38 +1,122 @@
-.on-hover-scale{
-  transition: all .2s;
 
-  &:hover{
-    transform: scale(1.1)
-  }
-
-  &:active{
-    transform: scale(0.96)
+@media screen and (min-width: $mobile-small){
+  .on-hover-scale{
+    transition: all .2s;
+  
+    &:hover{
+      transform: scale(1.1)
+    }
+  
+    &:active{
+      transform: scale(0.96)
+    }
   }
 }
 
+
+
+@media screen and (max-width: $mobile-small) {
+  .mobile-scale{
+    transition: all .2s;
+  
+    &:active{
+      transform: scale(0.96)
+    }
+  
+  }  
+}
+
+@media screen and (hover:none){
+  .on-hover-scale{
+    &:hover{
+      transform: none;
+    }
+  }
+}
+
+
+
+// Prepared Animations
+
+  // Scale Up Center
 
 .scale-up-center {
-	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.175, 0.885, 0.320, 1.275) 0.2s both;
-	        animation: scale-up-center 0.4s cubic-bezier(0.175, 0.885, 0.320, 1.275) 0.2s both;
+	-webkit-animation: scale-up-center 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275) 0.2s both;
+	        animation: scale-up-center 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275) 0.2s both;
 }
 
-@-webkit-keyframes scale-up-center {
+@keyframes scale-up-center {
   0% {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
+    -webkit-transform: scale(0);
+            transform: scale(0);
   }
+
   100% {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
 }
-@keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
+
+  // Tracking in Expand
+
+  .tracking-in-expand {
+    -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+            animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
   }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
+
+  @-webkit-keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
   }
+  @keyframes tracking-in-expand {
+    0% {
+      letter-spacing: -0.5em;
+      opacity: 0;
+    }
+    40% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+
+  // Adding custom delays to animate.css: 
+
+.animate__delay-02s {
+  animation-delay: .2s;
+}
+
+.animate__delay-04s {
+  animation-delay: .4s;
+}
+
+.animate__delay-06s {
+  animation-delay: .6s;
+}
+
+.animate__delay-08s {
+  animation-delay: .8s;
+}
+
+
+.animate__delay-1-8s {
+  animation-delay: 1.8s;
+}
+
+.animate__delay-2-2s {
+  animation-delay: 2.2s;
+}
+
+.animate__delay-2-4s {
+  animation-delay: 2.4s;
 }

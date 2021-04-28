@@ -1,8 +1,23 @@
-import HomePage from "./components/HomePage.vue"
-import ModelIndex from "./components/ModelsIndex.vue"
-import ModelView from "./components/ModelView.vue"
-import InfoPage from "./components/Information.vue"
-
+const HomePage = resolve => {
+    require.ensure(["./components/HomePage.vue"], () => {
+        resolve(require("./components/HomePage.vue"))
+    })
+}
+const ModelIndex = resolve => {
+    require.ensure(["./components/ModelsIndex.vue"], () => {
+        resolve(require("./components/ModelsIndex.vue"))
+    })
+}
+const ModelView = resolve => {
+    require.ensure(["./components/ModelView.vue"], () => {
+        resolve(require("./components/ModelView.vue"))
+    })
+}
+const InfoPage = resolve => {
+    require.ensure(["./components/Information.vue"], () => {
+        resolve(require("./components/Information.vue"))
+    })
+}
 
 export const routes = [
     {path: "/", component: HomePage},

@@ -4,13 +4,13 @@
             <img loading="lazy" width="86" heigth="52" src="../assets/images/logo.png" alt="" class="aar-footer__logo">
             <hr>
             <div class="aar-footer__contact">
-                <a href="mailto:info@accadijital.com" class="aar-footer__contact-container">
+                <a href="mailto:info@accadijital.com" class="aar-footer__contact-container mobile-scale">
                     <img loading="lazy" width="32" height="32" src="../assets/images/mail.png" alt="" class="aar-footer__contact-img">
                     <span class="aar-footer__contact-text">info@accadijital.com</span>
                 </a>
-                <a href="tel:00905393808050" class="aar-footer__contact-container">
+                <a href="tel:0902168025348" class="aar-footer__contact-container mobile-scale">
                     <img loading="lazy" width="32" height="32" src="../assets/images/phone.png" alt="" class="aar-footer__contact-img">
-                    <span class="aar-footer__contact-text">+90 539 380 80 50</span>
+                    <span class="aar-footer__contact-text">+90 216 802 53 48</span>
                 </a>
             </div>
         </div>
@@ -91,7 +91,7 @@ export default {
     @media screen and (max-width: $mobile-small){
 
     .footer.aar-footer{
-        height: 13.8rem;
+        height: $footer-height-mobile;
     }
 
 
@@ -107,6 +107,7 @@ export default {
     span.aar-footer__contact-text {
         font-family: "Inter";
         font-size: 1.4rem;
+        white-space: nowrap;
         letter-spacing: -0.03em;
         margin-top: 2rem;
     }

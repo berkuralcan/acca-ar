@@ -1,26 +1,44 @@
 <template>
     <div class="component-container">
         <div class="aar-model-left">
-            <img :src="require(`../assets/images/${chosenModel.imgURL}`)" class="grid-item__img">
             <model-viewer 
+                auto-rotate camera-controls
+                data-js-focus-visible
+                shadow-intensity="1"
+                stage-light-intensity="3" environment-intensity="2"
+                camera-orbit="180deg 65deg 3m"
                 ar
-                :src="'../assets/models/' + chosenModel.modelSRC"
+                :poster="require(`../assets/images/${chosenModel.imgURL}`)"
+                :src="`${publicPath}/models/${chosenModel.modelSRC[displayedVariant]}`"
+                :ios-src="`${publicPath}/models/${chosenModel.iosSRC[displayedVariant]}`"
                 class="aar-model-viewer">
             </model-viewer>
-            <div v-if="chosenModel.variants.length > 0" class="centered-flex">
-                I am display'ed.
+            <div v-if="chosenModel.variants.length > 0" class="centered-flex model-variants not-positioned">
+                    <img  
+                        class="model-variants__variant on-hover-scale pointer" 
+                        height="40" width="40" 
+                        v-for="(variant, index) in chosenModel.variants" 
+                        :key="variant" 
+                        :src="require(`../assets/images/variants/${variant}`)" 
+                        alt="Variant for model"
+                        @click="displayVariant(index)"
+                    >
             </div>
         </div>
         <div class="aar-model-right">
             <p class="aar-exp__text hidden-desktop">Modeli Arttırılmış Gerçeklikte görüntülemek için butonu tıklayın.</p>
-            <div class="aar-model-right__grid-container">
-                <div class="grid-item on-hover-scale" v-for="model in models" :key="model.id" @click="changeModel(model)">
-                    <img :src="require(`../assets/images/${model.imgURL}`)" class="grid-item__img">
+            <transition-group type="animation" enter-active-class="animate__animated animate__fadeIn" class="aar-model-right__grid-container" tag="div">
+                <div class="grid-item on-hover-scale mobile-scale" v-for="model in models" :key="model.id" @click="changeModel(model)">
+                    <img key="model.id" :src="require(`../assets/images/${model.imgURL}`)" class="grid-item__img">
                 </div>
-            </div>
+            </transition-group>
             <div class="aar-exp">
-                <ar-qr :text="getCurrentUrl()" :size="qrCodeSize"></ar-qr>
-                <p class="aar-exp__text">{{arExplanation}}</p>
+                <transition type="animation" enter-active-class="animate__animated animate__fadeIn animate__delay-1-8s" appear>
+                    <ar-qr :text="getCurrentUrl()" :size="qrCodeSize"></ar-qr>
+                </transition>
+                <transition type="animation" enter-active-class="animate__animated animate__fadeIn animate__delay-2s" appear>
+                    <p class="aar-exp__text">{{arExplanation}}</p>
+                </transition>
             </div>
             
         </div>
@@ -29,9 +47,8 @@
 </template>
 
 <script>
-import ModelViewer from "@google/model-viewer"
+import { ModelViewer } from "@google/model-viewer"
 import VueQRCodeComponent from 'vue-qr-generator'
-
 
 export default {
 
@@ -39,9 +56,10 @@ export default {
     name: "ModelView",
     data(){
         return{
-            
+            publicPath: process.env.BASE_URL,
             chosenModel: "",
-            qrCodeSize: 102,
+            displayedVariant: 0,
+            qrCodeSize: 90,
             arExplanation: "Modeli arttırılmış gerçeklikte (AR) görüntülemek için QR kodunu mobil cihazınıza okutabilirsiniz."
             
         }
@@ -59,7 +77,16 @@ export default {
     methods: {
         changeModel: function(model) {
             this.chosenModel = model
+            this.displayedVariant = 0
             this.$router.replace("models$" + model.id)
+        },
+
+        displayVariant(index){
+            if(this.displayedVariant === index) {
+                return
+            } else {
+                this.displayedVariant = index
+            }
         },
 
         getCurrentUrl: function() {
@@ -71,7 +98,6 @@ export default {
     created(){
         const modelID = this.$route.params.id
         this.chosenModel = this.models[modelID - 1]
-
 
     }
 
@@ -89,7 +115,7 @@ export default {
     }
 
   .aar-model-left{
-      grid-column: 2 / 6;
+      grid-column: 2 / 7;
   }
 
   .aar-model-right {
@@ -97,18 +123,22 @@ export default {
 
       &__grid-container{
           width: 100%;
-          min-height: 55rem;
           overflow-x: hidden;
           overflow-y: hidden;
           display: grid;
-          gap: 1.2%;
-          grid-template-columns: repeat(3, minmax(10rem, 20rem));
+          gap: 2%;
+          grid-template-columns: repeat(3, minmax(10rem, 15rem));
 
       }
   }
 
       .grid-item{
-
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-height: 15rem;
+        max-width: 15rem;
         background-color: #f5f5ff;
         user-select: none;
         cursor: pointer;
@@ -119,9 +149,21 @@ export default {
     }
 
     .aar-model-viewer{
-        border: 1px solid red;
         width: 100%;
     }
+
+    .model-variants{
+    position: absolute;
+    bottom: 2.3rem;
+    left: 40%;
+    justify-content: center;
+
+    &__variant{
+        &:not(:last-child) {
+            margin-right: 1.5rem;
+        }
+    }
+}
 
     .aar-exp{
         display: flex;
@@ -139,8 +181,38 @@ export default {
     }
 
     model-viewer {
-        width: 86rem;
         height: 65.7rem;
+    }
+
+
+    // Tablet 
+
+    @media screen and (max-width: $tablet-landscape) {
+            .aar-model-right{
+                grid-column: 7 / -1;
+            }
+
+            .grid-item__img{
+                max-width: 15rem;
+            }
+        }
+  
+  
+    @media screen and (max-width: $tablet-portrait) {
+        .aar-model-right{
+                grid-column: 7 / -1;
+                padding-right: 16px;
+        }
+
+        .grid-item{
+            max-height: 13rem;
+            max-width: 13rem;
+        }
+
+       .grid-item__img{
+                max-width: 10rem;
+        }
+
     }
 
 
@@ -154,19 +226,31 @@ export default {
 
         .aar-model-right__grid-container {
             display: flex;
+            padding-left: 1.6rem;
+            padding-bottom: 2.4rem;
             max-width: 100vw;
             overflow-x: scroll;
             scrollbar-width: none;
-
             &::-webkit-scrollbar {
                 display: none;
             }
         }
 
+        .aar-model-left{
+            width: 100%;
+        }
+
+        model-viewer{
+            height: 50vh;
+        }
+
         .grid-item{
             width: 15rem;
             height: 15rem;
+        }
 
+        grid-item:not(:last-child){
+            margin-right: 1rem;
         }
 
         .aar-exp {
@@ -175,9 +259,38 @@ export default {
 
         p.aar-exp__text{
             text-align: center;
+            font-size: 1.4rem;
+            line-height: 170%;
+            letter-spacing: -0.01em;
             font-weight: 300;
             margin: 5rem auto;
+            opacity: 0.5;
         }
+    }
+
+    .grid-item:nth-child(2){
+        animation-delay: .4s;
+    }
+    .grid-item:nth-child(3) {
+        animation-delay: .6s;
+    }
+    .grid-item:nth-child(4) {
+        animation-delay: .8s;
+    }
+    .grid-item:nth-child(5) {
+        animation-delay: 1s;
+    }
+    .grid-item:nth-child(6) {
+        animation-delay: 1.2s;
+    }
+    .grid-item:nth-child(7) {
+        animation-delay: 1.4s;
+    }
+    .grid-item:nth-child(8) {
+        animation-delay: 1.6s;
+    }
+    .grid-item:nth-child(9) {
+        animation-delay: 1.8s;
     }
 
 
